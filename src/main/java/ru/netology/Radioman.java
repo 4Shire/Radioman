@@ -1,8 +1,8 @@
 package ru.netology;
 
 public class Radioman {
-    public int currentStation;
-    public int currentVolume;
+    private int currentStation;
+    private int currentVolume;
 
     public void setCurrentStation(int newCurrentStation) {
         if (newCurrentStation > 9) {
