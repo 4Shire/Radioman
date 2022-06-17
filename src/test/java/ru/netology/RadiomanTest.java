@@ -4,9 +4,32 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RadiomanTest {
+class RadiomanTest {
+
+    Radioman station = new Radioman(10);
+
     @Test
-    public void shouldTurningStationOnNine() {
+    public void shouldSetNumberOfStations() {
+        Radioman station = new Radioman();
+        station.setNumberOfStations(10);
+
+        int expected = 10;
+        int actual = station.getNumberOfStations();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetNumberOfStationsUnderAmount() {
+        Radioman station = new Radioman();
+        station.setNumberOfStations(-1);
+
+        int expected = 10;
+        int actual = station.getNumberOfStations();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldStationTurningOnNine() {
         Radioman station = new Radioman();
         station.setCurrentStation(9);
 
@@ -16,7 +39,7 @@ public class RadiomanTest {
     }
 
     @Test
-    public void shouldTurningStationOnZero() {
+    public void shouldStationTurningOnZero() {
         Radioman station = new Radioman();
         station.setCurrentStation(0);
 
@@ -26,17 +49,7 @@ public class RadiomanTest {
     }
 
     @Test
-    public void shouldTurningStationOn10() {
-        Radioman station = new Radioman();
-        station.setCurrentStation(10);
-
-        int expected = 0;
-        int actual = station.getCurrentStation();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldTurningStationOnFive() {
+    public void shouldStationTurningOnFive() {
         Radioman station = new Radioman();
         station.setCurrentStation(5);
 
@@ -45,11 +58,30 @@ public class RadiomanTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void shouldStationTurningOnOne() {
+        Radioman station = new Radioman();
+        station.setCurrentStation(1);
+
+        int expected = 1;
+        int actual = station.getCurrentStation();
+        assertEquals(expected, actual);
+    }
 
     @Test
-    public void shouldTurningStationOnMinusOne() {
+    public void shouldStationTurningOnLessStation() {
         Radioman station = new Radioman();
         station.setCurrentStation(-1);
+
+        int expected = 9;
+        int actual = station.getCurrentStation();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldStationTurningOnTen() {
+        Radioman station = new Radioman();
+        station.setCurrentStation(10);
 
         int expected = 0;
         int actual = station.getCurrentStation();
@@ -67,6 +99,16 @@ public class RadiomanTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void shouldStationTurningOnTenByNext() {
+        Radioman station = new Radioman();
+        station.setCurrentStation(9);
+        station.increaseStation();
+
+        int expected = 0;
+        int actual = station.getCurrentStation();
+        assertEquals(expected, actual);
+    }
 
     @Test
     public void shouldTurningStationOnPrev() {
@@ -79,9 +121,19 @@ public class RadiomanTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void shouldStationTurningOnZeroToOneByNext() {
+        Radioman station = new Radioman();
+        station.setCurrentStation(0);
+        station.increaseStation();
+
+        int expected = 1;
+        int actual = station.getCurrentStation();
+        assertEquals(expected, actual);
+    }
 
     @Test
-    public void shouldTurningStationFromZeroByPrev() {
+    public void shouldStationFromZeroByPrev() {
         Radioman station = new Radioman();
         station.setCurrentStation(0);
         station.decreaseStation();
@@ -92,28 +144,26 @@ public class RadiomanTest {
     }
 
     @Test
-    public void shouldTurningStationOnTenByNext() {
+    public void shouldVolumeTurningOnOneHundred() {
         Radioman station = new Radioman();
-        station.setCurrentStation(9);
-        station.increaseStation();
+        station.setCurrentVolume(100);
 
-        int expected = 0;
-        int actual = station.getCurrentStation();
+        int expected = 100;
+        int actual = station.getCurrentVolume();
         assertEquals(expected, actual);
     }
-
     @Test
-    public void shouldTurningVolumeOnTen() {
+    public void shouldVolumeTurningOnNinetyNine() {
         Radioman station = new Radioman();
-        station.setCurrentVolume(10);
+        station.setCurrentVolume(99);
 
-        int expected = 10;
+        int expected = 99;
         int actual = station.getCurrentVolume();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldTurningVolumeZero() {
+    public void shouldVolumeTurningOnZero() {
         Radioman station = new Radioman();
         station.setCurrentVolume(0);
 
@@ -122,18 +172,10 @@ public class RadiomanTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void shouldTurningVolumeOnNine() {
-        Radioman station = new Radioman();
-        station.setCurrentVolume(5);
 
-        int expected = 5;
-        int actual = station.getCurrentVolume();
-        assertEquals(expected, actual);
-    }
 
     @Test
-    public void shouldTurningVolumeOnOne() {
+    public void shouldVolumeTurningOnOne() {
         Radioman station = new Radioman();
         station.setCurrentVolume(1);
 
@@ -141,42 +183,62 @@ public class RadiomanTest {
         int actual = station.getCurrentVolume();
         assertEquals(expected, actual);
     }
-
     @Test
-    public void shouldTurningVolumeOnEleven() {
+    public void shouldVolumeTurningOnZeroZero() {
         Radioman station = new Radioman();
-        station.setCurrentVolume(11);
+        station.setCurrentVolume(0);
 
         int expected = 0;
         int actual = station.getCurrentVolume();
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void shouldVolumeTurningOnOneHundredAndOne() {
+        Radioman station = new Radioman();
+        station.setCurrentVolume(101);
+
+        int expected = 100;
+        int actual = station.getCurrentVolume();
+        assertEquals(expected, actual);
+    }
+
+
 
     @Test
-    public void shouldTurningVolumeOnTenByNext() {
+    public void shouldVolumeTurningOnOneHundredByNext() {
         Radioman station = new Radioman();
-        station.setCurrentVolume(9);
+        station.setCurrentVolume(99);
         station.increaseVolume();
 
-        int expected = 10;
+        int expected = 100;
+        int actual = station.getCurrentVolume();
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void shouldVolumeTurningOnNinetyNineByPrev() {
+        Radioman station = new Radioman();
+        station.setCurrentVolume(100);
+        station.decreaseVolume();
+
+        int expected = 99;
         int actual = station.getCurrentVolume();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldTurningVolumeOnElevenByNext() {
+    public void shouldVolumeTurningOnOneHundredAndOneByNext() {
         Radioman station = new Radioman();
-        station.setCurrentVolume(10);
+        station.setCurrentVolume(101);
         station.increaseVolume();
 
-        int expected = 10;
+        int expected = 100;
         int actual = station.getCurrentVolume();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldTurningVolumeOnOneByNext() {
+    public void shouldVolumeTurningOnOneByNext() {
         Radioman station = new Radioman();
         station.setCurrentVolume(0);
         station.increaseVolume();
@@ -186,20 +248,9 @@ public class RadiomanTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void shouldTurningVolumeOnNineByPrev() {
-        Radioman station = new Radioman();
-        station.setCurrentVolume(10);
-        station.decreaseVolume();
-
-        int expected = 9;
-        int actual = station.getCurrentVolume();
-        assertEquals(expected, actual);
-    }
-
 
     @Test
-    public void shouldTurningVolumeZeroByPrev() {
+    public void shouldVolumeFromZeroByPrev() {
         Radioman station = new Radioman();
         station.setCurrentVolume(0);
         station.decreaseVolume();
@@ -210,12 +261,27 @@ public class RadiomanTest {
     }
 
     @Test
-    public void shouldTurningVolumeOnMinusOne() {
+    public void shouldVolumeTurningOnZeroByPrev() {
         Radioman station = new Radioman();
-        station.setCurrentVolume(-1);
+        station.setCurrentVolume(1);
+        station.decreaseVolume();
 
         int expected = 0;
         int actual = station.getCurrentVolume();
         assertEquals(expected, actual);
     }
+
+
+
+    @Test
+    public void shouldSetVolumeUnderMin() {
+        Radioman station = new Radioman();
+        station.setCurrentVolume(-1);
+        station.decreaseVolume();
+
+        int expected = 0;
+        int actual = station.getCurrentVolume();
+        assertEquals(expected, actual);
+    }
+
 }
